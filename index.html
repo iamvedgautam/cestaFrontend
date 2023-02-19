@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- <Java Script Chart> -->
+    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+
+        <div class="header-right">
+          <!-- <button class="btn"><span class="material-icons-outlined">notifications</span></button>
+          <button class="btn"><span class="material-icons-outlined">account_circle</span></button> -->
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined">inventory</span> Cesta
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="#" onclick='loadHtml("dashboard")'>
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item" onclick='loadHtml("created")'>
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">edit_note</span> Created
+            </a>
+          </li>
+          <li class="sidebar-list-item" onclick='loadHtml("subscribed")'>
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">subscriptions</span> Subscribed
+            </a>
+          </li>
+          <li class="sidebar-list-item" onclick='loadHtml("search")'>
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">search</span> Search Cest
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div id='dashboard' class='dashboard'>
+          <div class="main-title">
+            <p class="font-weight-bold">DASHBOARD</p>
+          </div>
+        
+          <div class="main-cards">
+        
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary">AMZN</p>
+                <span class="material-icons-outlined text-blue">trending_up</span>
+              </div>
+              <span class="text-primary font-weight-bold">249</span>
+            </div>
+        
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary">APPL</p>
+                <span class="material-icons-outlined text-orange">trending_up</span>
+              </div>
+              <span class="text-primary font-weight-bold">83</span>
+            </div>
+        
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary">ORACLE</p>
+                <span class="material-icons-outlined text-green">trending_up</span>
+              </div>
+              <span class="text-primary font-weight-bold">79</span>
+            </div>
+        
+            <div class="card">
+              <div class="card-inner">
+                <p class="text-primary">GOOGL</p>
+                <span class="material-icons-outlined text-red">trending_up</span>
+              </div>
+              <span class="text-primary font-weight-bold">56</span>
+            </div>
+        
+          </div>
+        
+          <div class="charts">
+        
+            <div class="charts-card">
+              <!-- <p class="chart-title">Created Protfolio</p> -->
+              <div id="pi-chart" class="pi-card"></div>
+            </div>
+        
+            <div class="charts-card">
+              <!-- <p class="chart-title">Subscribed Protfolio</p> -->
+              <div id="area-chart"></div>
+            </div>
+        
+          </div>
+        </div>
+
+        <div id='created' class='created'>
+          <table class="created-table" id = "created-table">
+            <thead>
+              <th>Name</th>
+              <th>Profit</th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div id='subscribed' class='subscribed'>
+          <table class="subscribed-table" id = "subscribed-table">
+            <thead>
+              <th>Name</th>
+              <th>Owner</th>
+              <th>Profit</th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div id='search' class='search'>
+          <div class="wrapper">
+            <div class="search-input">
+              <a href="" target="_blank" hidden></a>
+              <input type="text" placeholder="Type to search..">
+              <div class="autocom-box">
+                <!-- here list are inserted from javascript -->
+              </div>
+              <div class="icon"><i class="fas fa-search"></i></div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- End Main -->
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
