@@ -25,6 +25,8 @@
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
+        <div class="header-left" id="header-left">
+        </div>
 
         <div class="header-right">
           <!-- <button class="btn"><span class="material-icons-outlined">notifications</span></button>
@@ -69,6 +71,8 @@
 
       <!-- Main -->
       <main class="main-container">
+
+        <!-- Dashboard -->
         <div id='dashboard' class='dashboard'>
           <div class="main-title">
             <p class="font-weight-bold">DASHBOARD</p>
@@ -125,6 +129,7 @@
           </div>
         </div>
 
+        <!-- Created -->
         <div id='created' class='created'>
           <table class="created-table" id = "created-table">
             <thead>
@@ -133,8 +138,39 @@
             </thead>
             <tbody></tbody>
           </table>
+
+          <button class="open-button-2" onclick="openForm()">Add Stock</button>
+          <div class="form-popup" id="myForm">
+            <form action="/action_page.php" class="form-container">
+              <h1>Select Stock</h1>
+          
+              <label for="email"><b>Choose Cesta</b></label>
+              <div class="select-dropdown">
+                <select>
+                  <option value="Option 1">Cesta Ved</option>
+                </select>
+              </div>
+              <label for="email"><b>Choose Stock</b></label>
+              <div class="select-dropdown">
+                <select>
+                  <option value="Option 1">APPL</option>
+                  <option value="Option 2">GOOGL</option>
+                  <option value="Option 3">AMZN</option>
+                  <option value="Option 4">YAHOO</option>
+                  <option value="Option 5">ORACLE</option>
+                </select>
+              </div>
+          
+              <label for="psw"><b>Number of Stocks</b></label>
+              <input type="text" id="count" name="stock_count" required>
+          
+              <button type="submit" class="add-stock-btn">Add</button>
+              <button type="button" class="add-stock-btn-cancel" onclick="closeForm()">Close</button>
+            </form>
+          </div>
         </div>
 
+        <!-- Subscribed -->
         <div id='subscribed' class='subscribed'>
           <table class="subscribed-table" id = "subscribed-table">
             <thead>
@@ -146,18 +182,32 @@
           </table>
         </div>
 
+        <!-- Search -->
         <div id='search' class='search'>
           <div class="wrapper">
             <div class="search-input">
               <a href="" target="_blank" hidden></a>
-              <input type="text" placeholder="Type to search..">
+              <input type="text" placeholder="Type to search.." id="search-text-name">
               <div class="autocom-box">
                 <!-- here list are inserted from javascript -->
               </div>
-              <div class="icon"><i class="fas fa-search"></i></div>
+              <div class="icon"><span class="material-icons-outlined" onclick="check()">search</span></div>
             </div>
           </div>
         </div>
+        
+        <!-- Cesta -->
+        <div id='cesta' class='cesta'>
+          <button class="open-button-1" id="open-button-1" onclick="subscribe()">Subscribe</button>
+          <table class="cesta-table" id = "cesta-table">
+            <thead>
+              <th>Name</th>
+              <th>Stock Count</th>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
       </main>
       <!-- End Main -->
 
@@ -170,3 +220,4 @@
     <script src="js/scripts.js"></script>
   </body>
 </html>
+

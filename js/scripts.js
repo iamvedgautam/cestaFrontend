@@ -18,15 +18,22 @@ function closeSidebar() {
   }
 }
 
+
+
 function check () {
-  console.log("Hello");
+  
+  let element = document.getElementById("search-text-name");
+  console.log(`<h1>${element.value}</h1>`);
+  document.getElementById("header-left").innerHTML = `<h1>${element.value}</h1>`;
+  if (element.value)
+  loadHtml('cesta');
 }
 
-function loadHtml(id, filename) {
-  console.log("Hello");
+function loadHtml(id) {
+  // console.log("Hello");
   console.log(id);
-  console.log(`div id: ${id}, filename: ${filename}`);
-  elements = ['dashboard', 'created', 'subscribed', 'search']
+  console.log(`div id: ${id}`);
+  elements = ['dashboard', 'created', 'subscribed', 'search', 'cesta']
 
   for (let i = 0; i < elements.length; i++) {
     if (id == elements[i]) {
@@ -40,6 +47,11 @@ function loadHtml(id, filename) {
   }
 
   const table = ['created', 'subscribed'];
+  if (id != "cesta") {
+    document.getElementById("header-left").innerHTML = "";
+  }
+  document.getElementById("open-button-1").innerText = 'Subscribe';
+  document.getElementById("open-button-1").disabled = false;
   // if (table.includes(id)) {
   //   fillTable("created",document.querySelector('created-table'))
   // }
@@ -98,13 +110,30 @@ plotPiChart("area-chart", "Subscribed Protfolio");
 // ---------- Search Bar ----------
 
 let suggestions = [
-  "APPL",
-  "AMZN",
-  "ORACLE",
-  "TESLA",
-  "META",
-  "ALFJ",
-  "FJLS"
+  "Ved Cest",
+  "Rohit Cest",
+  "Savinay Cest",
+  "Ishan Cest",
+  "John Cest",
+  "Abby Cest",
+  "Carl Cest",
+  "Dan Cest",
+  "Ethan Cest",
+  "Farhan Cest",
+  "George Cest",
+  "Jack Cest",
+  "Kat Cest",
+  "Louis Cest",
+  "Matt Cest",
+  "Naman Cest",
+  "Will Cest",
+  "Ram Cest",
+  "Venom Cest",
+  "Sam Cest",
+  "Ishm Cest",
+  "Jill Cest",
+  "Nats Cest"
+
 ];
 
 // getting all required elements
@@ -118,21 +147,25 @@ let webLink;
 // if user press any key and release
 inputBox.onkeyup = (e)=>{
     let userData = e.target.value; //user enetered data
+    console.log(userData);
     let emptyArray = [];
     if(userData){
-        icon.onclick = ()=>{
-            webLink = `https://www.google.com/search?q=${userData}`;
-            linkTag.setAttribute("href", webLink);
-            linkTag.click();
-        }
+        // icon.onclick = ()=>{
+        //     webLink = `https://www.google.com/search?q=${userData}`;
+        //     linkTag.setAttribute("href", webLink);
+        //     linkTag.click();
+        //     window.open("http://monkey=" + text + "&red");
+        // }
         emptyArray = suggestions.filter((data)=>{
             //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
             return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
         });
+        console.log(emptyArray);
         emptyArray = emptyArray.map((data)=>{
             // passing return data inside li tag
             return data = `<li>${data}</li>`;
         });
+        console.log(emptyArray);
         searchWrapper.classList.add("active"); //show autocomplete box
         showSuggestions(emptyArray);
         let allList = suggBox.querySelectorAll("li");
@@ -140,6 +173,7 @@ inputBox.onkeyup = (e)=>{
             //adding onclick attribute in all li tag
             allList[i].setAttribute("onclick", "select(this)");
         }
+        console.log(allList);
     }else{
         searchWrapper.classList.remove("active"); //hide autocomplete box
     }
@@ -148,11 +182,9 @@ inputBox.onkeyup = (e)=>{
 function select(element){
     let selectData = element.textContent;
     inputBox.value = selectData;
-    icon.onclick = ()=>{
-        webLink = `https://www.google.com/search?q=${selectData}`;
-        linkTag.setAttribute("href", webLink);
-        linkTag.click();
-    }
+    // icon.onclick = ()=>{
+    //   loadHtml(id, filename);
+    // }
     searchWrapper.classList.remove("active");
 }
 
@@ -168,106 +200,47 @@ function showSuggestions(list){
 }
 
 
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
 
 
+let created_data = {"Cesta Ved": "10%"};
+var tableRefCreated = document.getElementById('created-table').getElementsByTagName('tbody')[0];
+for (const [key, value] of Object.entries(created_data)) {
+  tableRefCreated.insertRow().innerHTML = "<td>" +key+ "</td>"+
+  "<td>" +value+ "</td>";
+}
 
 
+let subs_data = {"Cesta Rohit": ["Rohit", "10%"]};
+var tableRefSubs = document.getElementById('subscribed-table').getElementsByTagName('tbody')[0];
+for (const [key, value] of Object.entries(subs_data)) {
+  tableRefSubs.insertRow().innerHTML = "<td>" +key+ "</td>"+
+  "<td>" +value[0]+ "</td>"+
+  "<td>" +value[1]+ "</td>";
+}
 
+const created_cesta = {"U.S. Gold Corp. (USAU)": "100", "N. Brown Group PLC (BWNG)": "200", 
+"C Security Systems AB (CSEC)": "333", "A Clean Slate Inc. (DRWN)": "120", "AMZN": "500"};
+var tableRefCesta = document.getElementById('cesta-table').getElementsByTagName('tbody')[0];
+for (const [key, value] of Object.entries(created_cesta)) {
+  tableRefCesta.insertRow().innerHTML = "<td>" +key+ "</td>"+
+  "<td>" +value+ "</td>";
+}
 
-// ---------- CHARTS ----------
+function subscribe() {
+  let cest = document.getElementById("header-left").innerText;
+  
+  tableRefSubs.insertRow().innerHTML = "<td>" +cest+ "</td>"+
+  "<td>" +cest.split(" ")[0]+ "</td>"+
+  "<td>" + "0%" + "</td>";
 
-// BAR CHART
-// var barChartOptions = {
-//   series: [{
-//     data: [10, 8, 6, 4, 2]
-//   }],
-//   chart: {
-//     type: 'bar',
-//     height: 350,
-//     toolbar: {
-//       show: false
-//     },
-//   },
-//   colors: [
-//     "#246dec",
-//     "#cc3c43",
-//     "#367952",
-//     "#f5b74f",
-//     "#4f35a1"
-//   ],
-//   plotOptions: {
-//     bar: {
-//       distributed: true,
-//       borderRadius: 4,
-//       horizontal: false,
-//       columnWidth: '40%',
-//     }
-//   },
-//   dataLabels: {
-//     enabled: false
-//   },
-//   legend: {
-//     show: false
-//   },
-//   xaxis: {
-//     categories: ["Laptop", "Phone", "Monitor", "Headphones", "Camera"],
-//   },
-//   yaxis: {
-//     title: {
-//       text: "Count"
-//     }
-//   }
-// };
+  document.getElementById("open-button-1").innerText = 'Subscribed';
+  document.getElementById("open-button-1").disabled = true;
 
-// var barChart = new ApexCharts(document.querySelector("#bar-chart"), barChartOptions);
-// barChart.render();
-
-
-// AREA CHART
-// var areaChartOptions = {
-//   series: [{
-//     name: 'Purchase Orders',
-//     data: [31, 40, 28, 51, 42, 109, 100]
-//   }, {
-//     name: 'Sales Orders',
-//     data: [11, 32, 45, 32, 34, 52, 41]
-//   }],
-//   chart: {
-//     height: 350,
-//     type: 'area',
-//     toolbar: {
-//       show: false,
-//     },
-//   },
-//   colors: ["#4f35a1", "#246dec"],
-//   dataLabels: {
-//     enabled: false,
-//   },
-//   stroke: {
-//     curve: 'smooth'
-//   },
-//   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-//   markers: {
-//     size: 0
-//   },
-//   yaxis: [
-//     {
-//       title: {
-//         text: 'Purchase Orders',
-//       },
-//     },
-//     {
-//       opposite: true,
-//       title: {
-//         text: 'Sales Orders',
-//       },
-//     },
-//   ],
-//   tooltip: {
-//     shared: true,
-//     intersect: false,
-//   }
-// };
-
-// var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartOptions);
-// areaChart.render();
+}
